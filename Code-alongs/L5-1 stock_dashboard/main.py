@@ -1,6 +1,7 @@
 import dash 
 import dash_bootstrap_components as dbc
 import os 
+
 from load_data import StockData
 from dash import html, dcc #dcc - dash core components
 from dash.dependencies import Output, Input
@@ -65,7 +66,13 @@ def filter_df(stock, time_index):
 
     return dff.to_json()
 
-@app.callback(Output(), Output(), Input(), Input())
+
+@app.callback(
+    Output("highest-value", "children"),
+    Output("lowest-value", "children"),
+    Input("filtered-df", "data"),
+    Input("ohlc-radio", "value"),
+)
 
 def highest_lowest_value_update(json_df, ohlc):
     dff = pd.read_json(json_df)
@@ -82,7 +89,6 @@ def highest_lowest_value_update(json_df, ohlc):
     Input("time-slider", "value")
     
 )
-
 def update_graph(json_df, stock, ohlc):
     dff = pd.read_json(json_df)
     return px.line(dff, x=dff.index, y=ohlc, title=symbol_dict[stock])
