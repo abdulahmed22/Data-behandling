@@ -5,7 +5,7 @@ from load_data import StockData
 from dash import html, dcc #dcc - dash core components
 from dash.dependencies import Output, Input
 import plotly_express as px
-
+from time_filtering import filter_time
 
 directory_path = os.path.dirname(__file__)
 path = os.path.join(directory_path, "stockdata")
