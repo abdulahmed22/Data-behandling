@@ -53,17 +53,39 @@ class Layout:
                         ),
                     ],
                 ),
+                dbc.Row([
+                        dbc.Col([
+                            dcc.Graph(id="stock-graph"),
+                            dcc.Slider(
+                                id="time-slider",
+                                min=0,
+                                max=6,
+                                marks=self._slider_marks,
+                                value=2,
+                                step=None,
+                            ),
+                    ],
+                        lg = {"size": "6"},
+                        xl = 6
+                    ),
+                    dbc.Col([
+                        dbc.Row(
+                            dbc.Card([
+                                    html.H2("highest-value"),
+                                    html.P(id="highest-value"),
+                            ]),
+                            dbc.Card([
+                                html.H2("lowest-value"),
+                                html.P(id="lowest-value"),
+
+                            ])
+                        )
+                    ])                
+                    ]
+                    ),
                 html.P(id="highest-value"),
                 html.P(id="lowest-value"),
-                dcc.Graph(id="stock-graph"),
-                dcc.Slider(
-                    id="time-slider",
-                    min=0,
-                    max=6,
-                    marks=self._slider_marks,
-                    value=2,
-                    step=None,
-                ),
+            
                 # storing intermediate value on clients browser in order to share between several callbacks
                 dcc.Store(id="filtered-df"),
             ]
