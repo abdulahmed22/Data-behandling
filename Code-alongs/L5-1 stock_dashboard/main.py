@@ -9,7 +9,7 @@ from layout import Layout
 import dash_bootstrap_components as dbc
 
 directory_path = os.path.dirname(__file__)
-path = os.path.join(directory_path, "stocksdata")
+path = os.path.join(directory_path, "stockdata")
 
 stockdata_object = StockData(path)
 
